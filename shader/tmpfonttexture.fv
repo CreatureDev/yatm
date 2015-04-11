@@ -1,0 +1,18 @@
+#version 330
+
+uniform ivec3 gdef;
+varying vec2 texp;
+
+void main()
+{
+	int index = gdef.z;
+	texp.x = (gl_VertexID / 2) * 1.f;
+	texp.y = (gl_VertexID % 2) * 1.f;
+	gl_Position.x = ((index % 16) - 8) / 8.f;
+	gl_Position.x += texp.x * (1/8);
+	gl_Position.y = ((index / 16) - 8) / 8.f;
+	gl_Position.y += texp.y * (1/8);
+	gl_Position.z = -0.5f;
+	gl_Position.w = 1.f;
+}
+

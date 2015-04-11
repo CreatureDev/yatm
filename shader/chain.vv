@@ -1,0 +1,13 @@
+#version 330
+
+uniform mat4 tmat;
+
+layout(location = 1) in vec3 pos;
+layout(location = 2) in vec2 tex;
+layout(location = 3) in vec3 nrm;
+
+void main()
+{
+	gl_Position = tmat * vec4(pos, 1.f);
+}
+

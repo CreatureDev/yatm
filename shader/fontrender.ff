@@ -1,0 +1,12 @@
+#version 330
+
+uniform sampler2D img;
+uniform vec3 fcol;
+out vec4 color;
+varying vec2 coord;
+
+void main()
+{
+	color = vec4(fcol, 1.f) * texture(img, coord).r;
+}
+

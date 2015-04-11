@@ -1,0 +1,15 @@
+
+__kernel
+void matrixmul(__global float *C, __global float *A, __global float *B)
+{
+	int id = get_global_id(0);
+	int row = id % 4;
+	int col = id / 4;
+	float val = 0.f;
+	val += A[row] * B[col*4];
+	val += A[row+4] * B[col*4+1];
+	val += A[row+8] * B[col*4+2];
+	val += A[row+12] * B[col*4+3];
+	C[id] = val;
+}
+

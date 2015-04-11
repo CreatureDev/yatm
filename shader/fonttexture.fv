@@ -1,0 +1,18 @@
+#version 330
+
+uniform int index;
+varying vec2 gpix;
+
+void main()
+{
+	float r = (gl_VertexID / 2);
+	float u = (1.f - gl_VertexID % 2);
+	gl_Position.x = -1.f + (index % 16) * (1/8.f);
+	gl_Position.x += (r * 1.f) * (1/8.f);
+	gl_Position.y = 1.f - (index / 16) * (1/8.f);
+	gl_Position.y -= (1/8.f) - (1.f - u * 1.f) * (1/8.f);
+	gl_Position.z = 0;
+	gl_Position.w = 1.f;
+	gpix = vec2((gl_VertexID / 2) * 1.25f - 0.25f, (gl_VertexID % 2) * 1.25f - 0.25f);
+}
+

@@ -1,0 +1,21 @@
+#version 330
+
+layout(location = 0) out vec4 color;
+uniform sampler2D glyph;
+uniform vec4 gdef;
+varying vec2 gpix;
+
+void main()
+{
+	bool vis;
+	vec2 pos;
+	vec2 dim = textureSize(glyph, 0) / gdef.w;
+	float bot = gdef.y - dim.y;
+	vis = (gpix.x >= gdef.x) && (gpix.x <= gdef.x + dim.x);
+	vis = vis && (gpix.y <= gdef.y) && (gpix.y >= gdef.y - dim.y);
+	pos.x = ((gpix.x - gdef.x) / dim.x);
+	pos.y = ((gdef.y - gpix.y) / dim.y);
+//	color = texture(glyph, gpix);	
+	color = texture(glyph, pos) * float(vis);
+}
+
